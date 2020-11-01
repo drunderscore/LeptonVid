@@ -28,13 +28,17 @@ COMMON_OBJ=$(OUTDIR)/aardvark.o $(OUTDIR)/FLIR_I2C.o $(OUTDIR)/crc16fast.o \
 	$(OUTDIR)/LEPTON_AGC.o \
 	$(OUTDIR)/LEPTON_I2C_Protocol.o $(OUTDIR)/LEPTON_I2C_Service.o \
 	$(OUTDIR)/LEPTON_OEM.o $(OUTDIR)/LEPTON_SDK.o $(OUTDIR)/LEPTON_SYS.o \
-	$(OUTDIR)/LEPTON_RAD.o $(OUTDIR)/LEPTON_VID.o  $(OUTDIR)/libMPSSE_definitions.o
+	$(OUTDIR)/LEPTON_RAD.o $(OUTDIR)/LEPTON_VID.o  $(OUTDIR)/libMPSSE_definitions.o \
+	$(OUTDIR)/ftdi_common.o $(OUTDIR)/ftdi_i2c.o $(OUTDIR)/ftdi_infra.o \
+	$(OUTDIR)/ftdi_mid.o $(OUTDIR)/ftdi_spi.o
 OBJ=$(COMMON_OBJ) $(CFG_OBJ)
 ALL_OBJ=$(OUTDIR)/aardvark.o $(OUTDIR)/FLIR_I2C.o $(OUTDIR)/crc16fast.o \
 	$(OUTDIR)/LEPTON_AGC.o \
 	$(OUTDIR)/LEPTON_I2C_Protocol.o $(OUTDIR)/LEPTON_I2C_Service.o \
 	$(OUTDIR)/LEPTON_OEM.o $(OUTDIR)/LEPTON_SDK.o $(OUTDIR)/LEPTON_SYS.o \
 	$(OUTDIR)/LEPTON_RAD.o $(OUTDIR)/LEPTON_VID.o  $(OUTDIR)/libMPSSE_definitions.o
+	$(OUTDIR)/ftdi_common.o $(OUTDIR)/ftdi_i2c.o $(OUTDIR)/ftdi_infra.o \
+	$(OUTDIR)/ftdi_mid.o $(OUTDIR)/ftdi_spi.o
 
 COMPILE=gcc -fpermissive -Dlinux=1 -c  -v  -g -o "$(OUTDIR)/$(*F).o" $(CFG_INC) "$<"
 LINK=ar -rs  "$(OUTFILE)" $(OBJ)
