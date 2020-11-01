@@ -55,11 +55,9 @@ kernel & user mode
 #define FTD2XX_API __declspec(dllimport)
 #endif
 
-#include <windows.h>
 
-
-typedef PVOID	FT_HANDLE;
-typedef ULONG	FT_STATUS;
+typedef void*	FT_HANDLE;
+typedef unsigned long long	FT_STATUS;
 
 //
 // Device status
@@ -184,11 +182,31 @@ typedef void (*PFT_EVENT_HANDLER)(DWORD,DWORD);
 #define FT_DEFAULT_RX_TIMEOUT	300
 #define FT_DEFAULT_TX_TIMEOUT	300
 
+	//
+	// Device information
+	//
+
+	typedef struct _ft_device_list_info_node {
+		unsigned long long Flags;
+		unsigned long long Type;
+		unsigned long long ID;
+		int LocId;
+		char SerialNumber[16];
+		char Description[64];
+		FT_HANDLE ftHandle;
+	} FT_DEVICE_LIST_INFO_NODE;
+
+	// Device information flags
+	enum {
+		FT_FLAGS_OPENED = 1,
+		FT_FLAGS_HISPEED = 2
+	};
+
 //
 // Device types
 //
 
-typedef ULONG	FT_DEVICE;
+typedef unsigned long long	FT_DEVICE;
 
 enum {
 	FT_DEVICE_BM,
@@ -251,6 +269,7 @@ enum {
 #define FT_232H_CBUS_CLK15				0x0B	//	15MHz clock
 #define FT_232H_CBUS_CLK7_5				0x0C	//	7.5MHz clock
 
+#if 0
 
 #ifdef __cplusplus
 extern "C" {
@@ -949,27 +968,6 @@ extern "C" {
 		);
 
 
-	//
-	// Device information
-	//
-
-	typedef struct _ft_device_list_info_node {
-		ULONG Flags;
-		ULONG Type;
-		ULONG ID;
-		DWORD LocId;
-		char SerialNumber[16];
-		char Description[64];
-		FT_HANDLE ftHandle;
-	} FT_DEVICE_LIST_INFO_NODE;
-
-	// Device information flags
-	enum {
-		FT_FLAGS_OPENED = 1,
-		FT_FLAGS_HISPEED = 2
-	};
-
-
 	FTD2XX_API
 		FT_STATUS WINAPI FT_CreateDeviceInfoList(
 		LPDWORD lpdwNumDevs
@@ -1067,3 +1065,4 @@ extern "C" {
 
 #endif	/* FTD2XX_H */
 
+#endif // 0
